@@ -5,27 +5,27 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-		<nav class="navbar navbar-findcond navbar-fixed-top">
-				<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Grade Horária</a>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">0</span></a>
-						</li>
-						<li class="active"><a href="#">Nome[Usuario]</a></li>
-					</ul>
-				</div>
+	<nav class="navbar navbar-findcond navbar-fixed-top">
+			<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Grade Horária</a>
 			</div>
-		</nav>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">0</span></a>
+					</li>
+					<li class="active"><a href="#">Nome[Usuario]</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 	<section class="content">
 		<div class="container">
@@ -34,7 +34,18 @@
 				<div class="col-md-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 class="panel-title">Quadro de Horários</h3>
+						<nav class="dropdown">
+							<h1 class="panel-title dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Quadro de Horários <small><i class="glyphicon glyphicon-triangle-bottom"></i></small></h1>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="#">Segunda</a></li>
+								<li><a href="#">Terça</a></li>
+								<li><a href="#">Quarta</a></li>
+								<li><a href="#">Quinta</a></li>
+								<li><a href="#">Sexta</a></li>
+								<li><a href="#">Sábado</a></li>
+							</ul>
+						</nav>
+						
 							<div class="pull-right">
 								<span class="clickable filter" data-toggle="tooltip" title="Filtrar" data-container="body">
 									<i class="glyphicon glyphicon-filter"></i>
@@ -48,9 +59,11 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Username</th>
+									<th>Curso</th>
+									<th>Semestre</th>
+									<th>Disciplina</th>
+									<th>Turno</th>
+									<th>Professor</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -59,17 +72,23 @@
 									<td>Kilgore</td>
 									<td>Trout</td>
 									<td>kilgore</td>
+									<td>boblahblah</td>
+									<td>boblahblah</td>
 								</tr>
 								<tr>
 									<td>2</td>
 									<td>Bob</td>
+									<td>boblahblah</td>
 									<td>Loblaw</td>
+									<td>boblahblah</td>
 									<td>boblahblah</td>
 								</tr>
 								<tr>
 									<td>3</td>
 									<td>Holden</td>
+									<td>boblahblah</td>
 									<td>Caulfield</td>
+									<td>boblahblah</td>
 									<td>penceyreject</td>
 								</tr>
 							</tbody>
@@ -85,6 +104,9 @@
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-3.1.0.min.js"></script>
 	<script src="js/index.js">
+	</script>
+	<script>
+		$('.dropdown-toggle').dropdown()
 	</script>
 </body>
 </html>
