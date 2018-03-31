@@ -32,7 +32,7 @@
     background: #f14444; font-weight: normal; font-size: 11px; margin: 0 4px; 
 }
  
-.main{
+.main, .register{
     padding-top: 7em;
 }
 

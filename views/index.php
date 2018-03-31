@@ -1,6 +1,10 @@
-<html>
+<?php include '../controllers/bdConnection.php'; ?>
+<html lang="PT-BR">
 <head>
-	<title>Registrar ~ Quadro</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Login ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +23,7 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">1</span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">0</span></a>
 					</li>
 					<li class="active"><a href="#">Nome[Usuario]</a></li>
 				</ul>
@@ -34,11 +38,8 @@
 				<p id="profile-name" class="profile-name-card"></p>
 				<form class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-                    <input type="text" id="inputCurso" class="form-control" placeholder="Curso" required>
-                    <input type="text" id="inputSemestre" class="form-control" placeholder="Semestre" required>
-                    <input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" required>
-                    <input type="text" id="inputTurno" class="form-control" placeholder="Turno" required>
-                    <input type="text" id="inputProfessor" class="form-control" placeholder="Professor" required>
+					<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 					<div id="remember" class="checkbox">
 						<label>
 								<input type="checkbox" value="remember-me"> Remember me
