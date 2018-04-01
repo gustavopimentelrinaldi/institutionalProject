@@ -1,11 +1,5 @@
-<?php
-	$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
-?>
-<html lang="PT-BR">
+<html>
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Login ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -38,21 +32,16 @@
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form method="post" action="../controllers/validarAcesso.php" class="form-signin">
+				<form class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-					<input type="text" id="inputCod" class="form-control" placeholder="Código/Matrícula" name="login" autofocus>
-					<input type="password" id="inputSenha" class="form-control" placeholder="Password" name="senha">
+					<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 					<div id="remember" class="checkbox">
 						<label>
 								<input type="checkbox" value="remember-me"> Remember me
 						</label>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="entrar">Entrar</button>
-					<?php
-						if($erro == 1){
-							echo '<font color="#FF0000">Usuário e ou senha inválido(s)</font>';
-						}
-					?>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
 				</form><!-- /form -->
 				<a href="#" class="forgot-password">
 						Forgot the password?
