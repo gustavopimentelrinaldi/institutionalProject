@@ -1,4 +1,7 @@
-
+<?php
+	session_start();
+	require_once '../models/init.php';
+?>
 <html lang="PT-BR">
 <head>
 	<meta charset="UTF-8"/>
@@ -9,7 +12,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<nav class="navbar navbar-findcond navbar-fixed-top">
+	<nav class="navbar navbar-findcond">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -30,11 +33,10 @@
 			</div>
 		</div>
 	</nav>
-
+	<center><h3><p>Bem-vindo ao seu painel, <?php echo $_SESSION['user_name']; ?> | <a href="logout.php">Sair</a></p></h3></center>
 	<section class="content">
 		<div class="container">
-			<h1>Filtrar <small>(<i class="glyphicon glyphicon-filter"></i>)</small></h1>
-				<div class="row">
+			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -50,15 +52,15 @@
 							</ul>
 						</nav>
 						
-							<div class="pull-right">
-								<span class="clickable filter" data-toggle="tooltip" title="Filtrar" data-container="body">
-									<i class="glyphicon glyphicon-filter"></i>
-								</span>
-							</div>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Filtrar" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
 						</div>
-						<div class="panel-body">
-							<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filtrar" />
-						</div>
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filtrar" />
+					</div>
 						<table class="table table-hover" id="dev-table">
 							<thead>
 								<tr>

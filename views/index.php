@@ -9,6 +9,28 @@
 	<title>Login ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script>
+		$(document).ready( function(){
+			//verificar se os campos de usuário e senha foram devidamente preenchidos
+			$('#log').click(function(){
+				var campo_vazio = false;
+				if($('#email').val() == ''){
+					$('#email').css({'border-color': '#A94442'});
+					campo_vazio = true;
+				} else {
+					$('#email').css({'border-color': '#CCC'});
+				}
+				if($('#senha').val() == ''){
+					$('#senha').css({'border-color': '#A94442'});
+					campo_vazio = true;
+				} else {
+					$('#senha').css({'border-color': '#CCC'});
+				}
+				if(campo_vazio) return false;
+			});
+		});					
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-findcond navbar-fixed-top">
@@ -38,16 +60,16 @@
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form method="post" action="../controllers/validarAcesso.php" class="form-signin">
+				<form method="post" action="../controllers/validaAcesso.php" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-					<input type="text" id="inputCod" class="form-control" placeholder="Código/Matrícula" name="login" autofocus>
-					<input type="password" id="inputSenha" class="form-control" placeholder="Password" name="senha">
+					<input type="email" id="email" class="form-control" placeholder="Código/Matrícula" name="email" autofocus>
+					<input type="password" id="senha" class="form-control" placeholder="Senha" name="senha">
 					<div id="remember" class="checkbox">
 						<label>
 								<input type="checkbox" value="remember-me"> Remember me
 						</label>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="entrar">Entrar</button>
+					<button id="log" class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="entrar">Entrar</button>
 					<?php
 						if($erro == 1){
 							echo '<font color="#FF0000">Usuário e ou senha inválido(s)</font>';
