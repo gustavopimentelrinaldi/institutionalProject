@@ -9,8 +9,8 @@
 
 	$sql = "SELECT id, nome FROM direcao where email = :email AND senha = :senha";
 	$stmt = $PDO->prepare($sql);
-	$stmt->bindParam(':email'. $email);
-	$stmt->bindParam(':senha'. $passwordHash);
+	$stmt->bindParam(':email', $email, PDO::PARAM_STR, 80);
+	$stmt->bindParam(':senha', $passwordHash, PDO::PARAM_STR, 40);
 	$stmt->execute();
 
 	$users = $stmt->fetchAll(PDO::FETCH_ASSOC);

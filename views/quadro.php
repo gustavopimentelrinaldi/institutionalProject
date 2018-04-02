@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once '../models/init.php';
+	require '../controllers/check.php';
 ?>
 <html lang="PT-BR">
 <head>
@@ -33,7 +34,10 @@
 			</div>
 		</div>
 	</nav>
-	<center><h3><p>Bem-vindo ao seu painel, <?php echo $_SESSION['user_name']; ?> | <a href="logout.php">Sair</a></p></h3></center>
+	<div class="well">
+		<center><h1>Você está no painel <small>Direção</small></h1>
+		<p>Bem-vindo ao seu painel, <?php echo $_SESSION['user_name']; ?> | <a href="../controllers/logout.php">Sair</a></p></center>
+	</div>
 	<section class="content">
 		<div class="container">
 			<div class="row">
