@@ -6,7 +6,7 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Login ~ Quadro</title>
+	<title>Backoffice ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery-1.11.1.min.js"></script>
@@ -46,7 +46,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="backoffice.php">Administração</a></li>
+					<li class="active"><a href="index.php">Aluno</a></li>
 				</ul>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form method="post" action="../controllers/validaUser.php" class="form-signin">
+				<form method="post" action="../controllers/validaAdm.php" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
 					<input type="email" id="email" class="form-control" placeholder="Email" name="email" autofocus>
 					<input type="password" id="senha" class="form-control" placeholder="Senha" name="senha">

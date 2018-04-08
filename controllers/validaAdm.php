@@ -7,24 +7,25 @@
 	$passwordHash = make_hash($senha);
 	$PDO = db_connect();
 
-	$sql = "SELECT id, nome FROM direcao where email = :email AND senha = :senha";
+	$sql = "SELECT id, nome, acesso FROM direcao where email = :email AND senha = :senha";
 	$stmt = $PDO->prepare($sql);
 	$stmt->bindParam(':email', $email, PDO::PARAM_STR, 80);
 	$stmt->bindParam(':senha', $passwordHash, PDO::PARAM_STR, 40);
 	$stmt->execute();
 
-	$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$adms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	if(count($users) <= 0 ){
+	if(count($adms) <= 0 ){
 		header('Location: ../views/index.php?erro=1');
 		exit;
 	}
 
-	$user = $users[0];
+	$adm = $adms[0];
 
 	session_start();
 	$_SESSION['logged_in'] = true;
-	$_SESSION['user_id'] = $user['id'];
-	$_SESSION['user_name'] = $user['nome'];
-	header('Location: ../views/quadro.php');
+	$_SESSION['user_id'] = $adm['id'];
+	$_SESSION['user_name'] = $adm['nome'];
+	$_SESSION['tipo_de_acesso'] = $adm['acesso'];
+	header('Location: ../views/editaQuadro.php');
 ?>
