@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Abr-2018 às 21:20
+-- Generation Time: 08-Abr-2018 às 03:28
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -32,20 +32,21 @@ CREATE TABLE `direcao` (
   `id` int(10) UNSIGNED NOT NULL,
   `nome` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
-  `senha` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+  `senha` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `acesso` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `direcao`
 --
 
-INSERT INTO `direcao` (`id`, `nome`, `email`, `senha`) VALUES
-(1, 'Usuário 1', 'user1@user.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858'),
-(2, 'Usuário 2', 'user2@user.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858'),
-(3, 'Usuário 3', 'user3@user.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858'),
-(4, 'Usuário 4', 'root@root.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858'),
-(5, 'Usuário 5', 'root@gmail.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858'),
-(6, 'Usuário 6', 'rosa@rosa.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858');
+INSERT INTO `direcao` (`id`, `nome`, `email`, `senha`, `acesso`) VALUES
+(1, 'Adm 1', 'adm1@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
+(2, 'Adm 2', 'adm2@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
+(3, 'Adm 3', 'adm3@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
+(4, 'Adm 4', 'adm4@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
+(5, 'root', 'root@root.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
+(6, 'rosa', 'rosa@rosa.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1);
 
 --
 -- Indexes for dumped tables
@@ -65,7 +66,7 @@ ALTER TABLE `direcao`
 -- AUTO_INCREMENT for table `direcao`
 --
 ALTER TABLE `direcao`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
