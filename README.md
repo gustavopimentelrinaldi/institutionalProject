@@ -9,7 +9,8 @@ controllers¬
   bdConnection.php
   check.php
   logout.php
-  validaAcesso.php
+  validaAdm.php
+  validaUser.php
 models¬
   init.php
 views¬
@@ -28,7 +29,9 @@ views¬
     bootstrap-3.1.0.min.js
     index.js
     jquery-1.11.1.min.js
+  backoffice.php
   cadastro.php
+  editaQuadro.php
   index.php
   quadro.php
 index.php
