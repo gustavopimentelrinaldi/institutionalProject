@@ -2,6 +2,7 @@
 
 * PHP
 * MySQL
+* Bootstrap
 
 # Organized in the MVC architecture pattern
 ```
