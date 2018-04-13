@@ -2,6 +2,18 @@
 	session_start();
 	require_once '../models/init.php';
 	require '../controllers/check.php';
+
+	$query = "SELECT * curso WHERE id >= 1 ";
+	$res = mysqli_query($query) or die(mysqli_error());
+	$num_reg = mysqli_num_rows($res);
+
+	for($i=0; $i<num_reg; $i++){
+		$campo = mysqli_fetch_array($res);
+		$id = $campo["id"];
+		$nomeCurso = $campo["nomeCurso"];
+		$turno = $campo["turno"];
+		$espaco = $campo["espaco"];
+	}
 ?>
 <html lang="PT-BR">
 <head>
@@ -30,7 +42,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<i class="fa fa-fw fa-bell-o"></i> Acesso 
 							<span class="badge">
-								<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; } else{ header('Location: index.php?erro=1'); }?>
+								<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; }?>
 							</span>
 						</a>
 					</li>
@@ -79,16 +91,19 @@
 									<th>Disciplina</th>
 									<th>Turno</th>
 									<th>Professor</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>Kilgore</td>
+									<td><?php echo $nomeCurso; ?></td>
 									<td>Trout</td>
 									<td>kilgore</td>
 									<td>boblahblah</td>
 									<td>boblahblah</td>
+									<?php $button = "<td><a href='editaCurso.php' class='btn btn-primary'>Editar</a></td>"; ?>
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $button; } ?>
 								</tr>
 								<tr>
 									<td>2</td>
@@ -97,6 +112,7 @@
 									<td>Loblaw</td>
 									<td>boblahblah</td>
 									<td>boblahblah</td>
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $button; }?>
 								</tr>
 								<tr>
 									<td>3</td>
@@ -105,6 +121,25 @@
 									<td>Caulfield</td>
 									<td>boblahblah</td>
 									<td>penceyreject</td>
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $button; }?>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Holden</td>
+									<td>boblahblah</td>
+									<td>Caulfield</td>
+									<td>boblahblah</td>
+									<td>penceyreject</td>
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $button; }?>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Holden</td>
+									<td>boblahblah</td>
+									<td>Caulfield</td>
+									<td>boblahblah</td>
+									<td>penceyreject</td>
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $button; }?>
 								</tr>
 							</tbody>
 						</table>
