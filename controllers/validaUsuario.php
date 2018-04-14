@@ -4,10 +4,10 @@
 	$email = isset($_POST['email']) ? $_POST['email'] : '';
 	$senha = isset($_POST['senha']) ? $_POST['senha'] : '';
 
-	$passwordHash = make_hash($senha);
+	$passwordHash = sha1($senha);
 	$PDO = db_connect();
 
-	$sql = "SELECT id, nome, acesso FROM aluno where email = :email AND senha = :senha";
+	$sql = "SELECT id, nome, acesso FROM aluno WHERE email = :email AND senha = :senha";
 	$stmt = $PDO->prepare($sql);
 	$stmt->bindParam(':email', $email, PDO::PARAM_STR, 80);
 	$stmt->bindParam(':senha', $passwordHash, PDO::PARAM_STR, 40);

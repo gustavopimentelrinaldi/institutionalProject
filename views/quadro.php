@@ -1,7 +1,9 @@
 <?php
 	session_start();
-	require_once '../models/init.php';
-	require '../controllers/check.php';
+	require_once '../controllers/bdConnection.php';
+	$query = "SELECT * FROM curso";
+	$result = mysqli_query( $conn, $query );
+	mysqli_close($conn);
 ?>
 <html lang="PT-BR">
 <head>
@@ -26,23 +28,22 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
+				<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<li><a href='cadastro.php'>Cadastrar Curso</a></li>"; }?>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<i class="fa fa-fw fa-bell-o"></i> Acesso 
 							<span class="badge">
-								<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; } else{ header('Location: index.php?erro=1'); }?>
+								<?php echo $_SESSION['tipo_de_acesso']; ?>
 							</span>
 						</a>
 					</li>
 					<li class="active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
+					<li><a href='../controllers/logout.php'>Sair</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="well">
-		<center><h1>Você está no painel <small>Direção</small></h1>
-		<p>Bem-vindo ao seu painel, <?php echo $_SESSION['user_name']; ?> | <a href="../controllers/logout.php">Sair</a></p></center>
-	</div>
+
 	<section class="content">
 		<div class="container">
 			<div class="row">
@@ -75,37 +76,28 @@
 								<tr>
 									<th>#</th>
 									<th>Curso</th>
-									<th>Semestre</th>
-									<th>Disciplina</th>
 									<th>Turno</th>
+									<th>Disciplina</th>
 									<th>Professor</th>
+									<th>Sala</th>
+									<th>espaco</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Kilgore</td>
-									<td>Trout</td>
-									<td>kilgore</td>
-									<td>boblahblah</td>
-									<td>boblahblah</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Bob</td>
-									<td>boblahblah</td>
-									<td>Loblaw</td>
-									<td>boblahblah</td>
-									<td>boblahblah</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Holden</td>
-									<td>boblahblah</td>
-									<td>Caulfield</td>
-									<td>boblahblah</td>
-									<td>penceyreject</td>
-								</tr>
+							<?php
+								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
+									while( $row = mysqli_fetch_assoc($result) ) {
+										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+									}
+								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
+									while( $row = mysqli_fetch_assoc($result) ) {
+										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td></td></tr>";
+									}
+								}else {
+										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
+								}
+								?>
 							</tbody>
 						</table>
 					</div>

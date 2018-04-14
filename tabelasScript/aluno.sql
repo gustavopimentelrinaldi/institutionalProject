@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Abr-2018 às 03:27
+-- Generation Time: 14-Abr-2018 às 05:25
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -29,21 +29,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `aluno` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `senha` varchar(50) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `nome` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `senha` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `acesso` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `aluno`
 --
 
 INSERT INTO `aluno` (`id`, `nome`, `email`, `senha`, `acesso`) VALUES
-(1, 'User 1', 'user1@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 0),
-(2, 'User 2', 'user2@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 0),
-(3, 'usuario', 'usuario@usuario.com', '123456', 0);
+(1, 'User 1', 'user1@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0),
+(2, 'User 2', 'user2@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0),
+(3, 'User 3', 'user3@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0),
+(4, 'User 4', 'user4@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0),
+(5, 'user', 'user@user.com', '12dea96fec20593566ab75692c9949596833adc9', 0),
+(6, 'usuario', 'usuario@usuario.com', '12dea96fec20593566ab75692c9949596833adc9', 0);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +66,7 @@ ALTER TABLE `aluno`
 -- AUTO_INCREMENT for table `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

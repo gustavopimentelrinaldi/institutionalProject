@@ -1,4 +1,34 @@
-<!DOCTYPE HTML>
+<?php
+	session_start();
+	if(!$_SESSION['tipo_de_acesso'] == 1){ header('Location: index.php'); }
+	include('../controllers/bdConnection.php');
+	include('../models/functions.php');
+
+	if( isset( $_POST['add'] ) ) {
+   
+    $nome = $turno = $espaco = $disciplina = $sala = $professor = "";
+    
+    $nome         = htmlspecialchars( $_POST["nome"] );
+    $turno        = htmlspecialchars( $_POST["turno"] );
+    $espaco       = htmlspecialchars( $_POST["espaco"] );
+    $disciplina   = htmlspecialchars( $_POST["disciplina"] );
+    $sala         = htmlspecialchars( $_POST["sala"] );
+    $professor    = htmlspecialchars( $_POST["professor"] );
+    
+    if($nome) {
+			$query = "INSERT INTO curso (id, nome, turno, espaco, disciplina, sala, professor) VALUES (default, '$nome', '$turno', '$espaco', '$disciplina', '$sala', '$professor')";
+			$result = mysqli_query( $conn, $query );
+
+			if($result) {
+				header("Location: quadro.php");
+			} else {
+				echo "Error: ". $query ."<br>" . mysqli_error($conn);
+			}
+	}
+}
+mysqli_close($conn);
+?>
+
 <html lang="PT-BR">
 <head>
 	<meta charset="UTF-8"/>
@@ -8,6 +38,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 	<nav class="navbar navbar-findcond navbar-fixed-top">
 			<div class="container">
@@ -22,10 +53,16 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="quadro.php">Voltar</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">1</span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+							<i class="fa fa-fw fa-bell-o"></i> Acesso 
+							<span class="badge">
+								<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; }?>
+							</span>
+						</a>
 					</li>
-					<li class="active"><a href="#">Nome[Usuario]</a></li>
+					<li class="active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
 				</ul>
 			</div>
 		</div>
@@ -36,23 +73,17 @@
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form class="form-signin">
+				<form action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" required/>
-						<input type="text" id="inputSemestre" class="form-control" placeholder="Semestre" required/>
-						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" required/>
-						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" required/>
-						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" required/>
-					<div id="remember" class="checkbox">
-						<label>
-								<input type="checkbox" value="remember-me"> Remember me
-						</label>
-					</div>
-					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" name="nome" value="" required/>
+						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" name="turno" value="" required/>
+						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" name="disciplina" value="" required/>
+						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" name="professor" value="" required/>
+						<input type="text" id="inputSala" class="form-control" placeholder="Sala" name="sala" required/>
+						<input type="text" id="inputEspaco" class="form-control" placeholder="espaço(P12, P13)" name="espaco" value="" required/>
+	
+					<button type="submit" name="add" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 				</form><!-- /form -->
-				<a href="#" class="forgot-password">
-						Forgot the password?
-				</a>
 			</div><!-- /card-container -->
 		</div><!-- /container -->
 	</section>

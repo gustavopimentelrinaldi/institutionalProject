@@ -1,8 +1,5 @@
 <?php
-  session_start();
-  require_once '../models/init.php';
-  require '../controllers/check.php';
-	
+ 
 	
 ?>
 

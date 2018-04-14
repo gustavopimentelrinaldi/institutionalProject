@@ -57,7 +57,7 @@
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form method="post" action="../controllers/validaUser.php" class="form-signin">
+				<form method="post" action="../controllers/validaUsuario.php" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
 					<input type="email" id="email" class="form-control" placeholder="Email" name="email" autofocus>
 					<input type="password" id="senha" class="form-control" placeholder="Senha" name="senha">

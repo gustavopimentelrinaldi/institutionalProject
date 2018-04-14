@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Abr-2018 às 03:28
+-- Generation Time: 14-Abr-2018 às 05:25
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -41,12 +41,12 @@ CREATE TABLE `direcao` (
 --
 
 INSERT INTO `direcao` (`id`, `nome`, `email`, `senha`, `acesso`) VALUES
-(1, 'Adm 1', 'adm1@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
-(2, 'Adm 2', 'adm2@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
-(3, 'Adm 3', 'adm3@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
-(4, 'Adm 4', 'adm4@adm.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
-(5, 'root', 'root@root.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1),
-(6, 'rosa', 'rosa@rosa.com', '83353d597cbad458989f2b1a5c1fa1f9f665c858', 1);
+(1, 'Adm 1', 'adm1@adm.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1),
+(2, 'Adm 2', 'adm2@adm.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1),
+(3, 'Adm 3', 'adm3@adm.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1),
+(4, 'Adm 4', 'adm4@adm.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1),
+(5, 'root', 'root@root.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1),
+(6, 'rosa', 'rosa@rosa.com', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 1);
 
 --
 -- Indexes for dumped tables
