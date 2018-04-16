@@ -53,19 +53,18 @@
 	</nav>
 
 	<section class="main">
+	<div class="alert alert-warning alert-dismissible container" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>Atenção!</strong> Você está na tela de login da Direção!
+	</div>
 		<div class="container">
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
-				<p id="profile-name" class="profile-name-card"></p>
+				<br>
 				<form method="post" action="../controllers/validaAdm.php" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-					<input type="email" id="email" class="form-control" placeholder="Email" name="email" autofocus>
+					<input type="email" id="email" class="form-control" placeholder="Email" name="email">
 					<input type="password" id="senha" class="form-control" placeholder="Senha" name="senha">
-					<div id="remember" class="checkbox">
-						<label>
-								<input type="checkbox" value="remember-me"> Lembrar de mim
-						</label>
-					</div>
 					<button id="log" class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="entrar">Entrar</button>
 					<?php
 						if($erro == 1){
@@ -79,5 +78,11 @@
 			</div><!-- /card-container -->
 		</div><!-- /container -->
 	</section>
+	
+	<script>
+		$('.close').click(function(){
+			$('.alert').fadeOut();
+		});
+	</script>
 </body>
 </html>
