@@ -1,6 +1,71 @@
 <?php
- 
+	session_start();
+	if(!$_SESSION['tipo_de_acesso'] == 1){ header('Location: index.php'); }
+	include('../controllers/bdConnection.php');
+	include('../models/functions.php');
+
+	$cursoID = $_GET['id'];
+
+	$query = "SELECT * FROM curso WHERE id='$cursoID'";
+	$result = mysqli_query($conn, $query);
 	
+	if(mysqli_num_rows($result) > 0 ){
+		while($row = mysqli_fetch_assoc($result)){
+			$nome         = $row['nome'];
+			$turno        = $row['turno'];
+			$espaco       = $row['espaco'];
+			$disciplina   = $row['disciplina'];
+			$sala         = $row['sala'];
+			$professor    = $row['professor'];
+		}
+	}
+
+	if( isset($_POST['update']) ) {
+    
+    // set variables
+    $nome         = validateFormData( $_POST["nome"] );
+    $turno        = validateFormData( $_POST["turno"] );
+    $espaco       = validateFormData( $_POST["espaco"] );
+    $disciplina   = validateFormData( $_POST["disciplina"] );
+    $sala         = validateFormData( $_POST["sala"] );
+    $professor    = validateFormData( $_POST["professor"] );
+    
+    // new database query & result
+    $query = "UPDATE curso
+							SET nome = '$nome',
+							turno = '$turno',
+							espaco = '$espaco',
+							disciplina = '$disciplina',
+							sala = '$sala',
+							professor = '$professor'
+							WHERE id = '$cursoID'";
+    
+    $result = mysqli_query($conn, $query);
+    
+    if($result) {
+        
+        // redirect to client page with query string
+        header("Location: quadro.php");
+    } else {
+        echo "Error updating record: " . mysqli_error($conn); 
+    }
+	}
+
+	// if confirm delete button was submitted
+	if(isset($_POST['confirm-delete'])){
+		// new database query & result
+		$query = "DELETE FROM curso WHERE id='$cursoID'";
+		$result = mysqli_query($conn, $query);
+		
+		if($result) {
+			// redirect to client page with query string
+			header("Location: quadro.php");
+		} else {
+			echo "Error updating record: " . mysqli_error($conn);
+		}
+	}
+
+	mysqli_close($conn);
 ?>
 
 <!DOCTYPE HTML>
@@ -27,36 +92,51 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Acesso <span class="badge">1</span></a>
-					</li>
-					<li class="active"><a href="#">Nome[Usuario]</a></li>
+					<li class="active"><a href="quadro.php">Voltar</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+								<i class="fa fa-fw fa-bell-o"></i> Acesso 
+								<span class="badge">
+									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; }?>
+								</span>
+							</a>
+						</li>
+					<li class="active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<section class="register">
+	<?php
+		// if delete button was submitted
+		if(isset($_POST['delete'])){
+			echo "<div class='alert alert-danger alert-dismissible' style='text-align: center;'>
+							<h3>Você tem certeza de que quer excluir esse curso?</h3><br>
+							<form action='". htmlspecialchars( $_SERVER["PHP_SELF"] ) ."?id=$cursoID' method='post'>
+								<input type='submit' class='btn btn-danger' name='confirm-delete' value='Sim!'>
+								<a type='button' class='btn btn-default' href='quadro.php'>Oops, não!</a>
+							</form>
+						</div>";
+		}
+	?>
 		<div class="container">
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<form class="form-signin">
+				<form class="form-signin" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>?id=<?php echo $cursoID; ?>" method="post">
 					<span id="reauth-email" class="reauth-email"></span>
-						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" value="<?php echo $nomeCurso ?>" required/>
-						<input type="text" id="inputSemestre" class="form-control" placeholder="Semestre" value="<?php echo "nada pra mostrar" ?>" required/>
-						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" value="<?php echo "nada pra mostrar" ?>" required/>
-						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" value="<?php echo $turno ?>" required/>
-						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" value="<?php echo $espaco ?>" required/>
-					<div id="remember" class="checkbox">
-						<label>
-								<input type="checkbox" value="remember-me"> Remember me
-						</label>
-					</div>
-					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" name="nome" value="<?php echo $nome; ?>" required/>
+						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" name="turno" value="<?php echo $turno; ?>" required/>
+						<input type="text" id="inputEspaco" class="form-control" placeholder="Espaço(P12, P13)" name="espaco" value="<?php echo $espaco; ?>" required/>
+						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" name="disciplina" value="<?php echo $disciplina; ?>" required/>
+						<input type="text" id="inputSala" class="form-control" placeholder="Sala" name="sala" value="<?php echo $sala; ?>" required/>
+						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" name="professor" value="<?php echo $professor; ?>" required/>
+					<button class="btn btn-info btn-block" type="submit" name="update">Atualizar</button>
+					<button class="btn btn-danger btn-block" type="submit" name="delete">Deletar</button>
 				</form><!-- /form -->
 				<a href="#" class="forgot-password">
-						Forgot the password?
+					Esqueceu sua senha?
 				</a>
 			</div><!-- /card-container -->
 		</div><!-- /container -->

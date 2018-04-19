@@ -75,12 +75,12 @@ mysqli_close($conn);
 				<p id="profile-name" class="profile-name-card"></p>
 				<form action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF'] ); ?>" method="post" class="form-signin">
 					<span id="reauth-email" class="reauth-email"></span>
-						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" name="nome" value="" required/>
-						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" name="turno" value="" required/>
-						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" name="disciplina" value="" required/>
-						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" name="professor" value="" required/>
+						<input type="text" id="inputCurso" class="form-control" placeholder="Curso" name="nome" required/>
+						<input type="text" id="inputTurno" class="form-control" placeholder="Turno" name="turno" required/>
+						<input type="text" id="inputEspaco" class="form-control" placeholder="Espaço(P12, P13)" name="espaco" required/>
+						<input type="text" id="inputDisciplina" class="form-control" placeholder="Disciplina" name="disciplina" required/>
 						<input type="text" id="inputSala" class="form-control" placeholder="Sala" name="sala" required/>
-						<input type="text" id="inputEspaco" class="form-control" placeholder="espaço(P12, P13)" name="espaco" value="" required/>
+						<input type="text" id="inputProfessor" class="form-control" placeholder="Professor" name="professor" required/>
 	
 					<button type="submit" name="add" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 				</form><!-- /form -->

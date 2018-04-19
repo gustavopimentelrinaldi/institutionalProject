@@ -2,7 +2,7 @@
 	session_start();
 	require_once '../controllers/bdConnection.php';
 	$query = "SELECT * FROM curso";
-	$result = mysqli_query( $conn, $query );
+	$result = mysqli_query($conn, $query);
 	mysqli_close($conn);
 ?>
 <html lang="PT-BR">
@@ -89,7 +89,10 @@
 							<?php
 								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
 									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+										echo "<tr>";
+											echo "<td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td>";
+											echo '<td><a href="editaCurso.php?id=' . $row['id'] . '" class="btn btn-primary btn-md">Editar</a></td>';
+										echo "</tr>";
 									}
 								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
 									while( $row = mysqli_fetch_assoc($result) ) {
