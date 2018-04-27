@@ -4,7 +4,7 @@
 * MySQL
 * Bootstrap
 
-# Organized in the MVC architecture pattern
+# Organized in the MVC design pattern
 ```
 controllers¬
   bdConnection.php
