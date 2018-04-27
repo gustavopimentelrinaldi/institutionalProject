@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	if($_SESSION['tipo_de_acesso'] == null){ header('Location: index.php?erro=1'); }
 	require_once '../controllers/bdConnection.php';
 	$query = "SELECT * FROM curso";
 	$result = mysqli_query($conn, $query);
