@@ -11,8 +11,9 @@ controllers¬
   check.php
   logout.php
   validaAdm.php
-  validaUser.php
+  validaUsuario.php
 models¬
+  functions.php
   init.php
 views¬
   css¬
@@ -32,7 +33,7 @@ views¬
     jquery-1.11.1.min.js
   backoffice.php
   cadastro.php
-  editaQuadro.php
+  editaCurso.php
   index.php
   quadro.php
 index.php
