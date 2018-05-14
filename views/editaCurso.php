@@ -3,69 +3,7 @@
 	if(!$_SESSION['tipo_de_acesso'] == 1){ header('Location: index.php'); }
 	include('../controllers/bdConnection.php');
 	include('../models/functions.php');
-
-	$cursoID = $_GET['id'];
-
-	$query = "SELECT * FROM curso WHERE id='$cursoID'";
-	$result = mysqli_query($conn, $query);
-	
-	if(mysqli_num_rows($result) > 0 ){
-		while($row = mysqli_fetch_assoc($result)){
-			$nome         = $row['nome'];
-			$turno        = $row['turno'];
-			$espaco       = $row['espaco'];
-			$disciplina   = $row['disciplina'];
-			$sala         = $row['sala'];
-			$professor    = $row['professor'];
-		}
-	}
-
-	if( isset($_POST['update']) ) {
-    
-    // set variables
-    $nome         = validateFormData( $_POST["nome"] );
-    $turno        = validateFormData( $_POST["turno"] );
-    $espaco       = validateFormData( $_POST["espaco"] );
-    $disciplina   = validateFormData( $_POST["disciplina"] );
-    $sala         = validateFormData( $_POST["sala"] );
-    $professor    = validateFormData( $_POST["professor"] );
-    
-    // new database query & result
-    $query = "UPDATE curso
-							SET nome = '$nome',
-							turno = '$turno',
-							espaco = '$espaco',
-							disciplina = '$disciplina',
-							sala = '$sala',
-							professor = '$professor'
-							WHERE id = '$cursoID'";
-    
-    $result = mysqli_query($conn, $query);
-    
-    if($result) {
-        
-        // redirect to client page with query string
-        header("Location: quadro.php");
-    } else {
-        echo "Error updating record: " . mysqli_error($conn); 
-    }
-	}
-
-	// if confirm delete button was submitted
-	if(isset($_POST['confirm-delete'])){
-		// new database query & result
-		$query = "DELETE FROM curso WHERE id='$cursoID'";
-		$result = mysqli_query($conn, $query);
-		
-		if($result) {
-			// redirect to client page with query string
-			header("Location: quadro.php");
-		} else {
-			echo "Error updating record: " . mysqli_error($conn);
-		}
-	}
-
-	mysqli_close($conn);
+	include('../controllers/editaCurso_controller.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -73,14 +11,14 @@
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Registrar ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="index">
 	<nav class="navbar navbar-findcond navbar-fixed-top">
-			<div class="container">
+		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle navigation</span>
@@ -108,18 +46,19 @@
 	</nav>
 
 	<section class="register">
-	<?php
-		// if delete button was submitted
-		if(isset($_POST['delete'])){
-			echo "<div class='alert alert-danger alert-dismissible' style='text-align: center;'>
-							<h3>Você tem certeza de que quer excluir esse curso?</h3><br>
-							<form action='". htmlspecialchars( $_SERVER["PHP_SELF"] ) ."?id=$cursoID' method='post'>
-								<input type='submit' class='btn btn-danger' name='confirm-delete' value='Sim!'>
-								<a type='button' class='btn btn-default' href='quadro.php'>Oops, não!</a>
-							</form>
-						</div>";
-		}
-	?>
+		<?php
+			// if delete button was submitted
+			if(isset($_POST['delete'])){
+				echo "<div class='alert alert-danger alert-dismissible' style='text-align: center;'>
+								<h3>Você tem certeza de que quer excluir esse curso?</h3><br>
+								<form action='". htmlspecialchars( $_SERVER["PHP_SELF"] ) ."?id=$cursoID' method='post'>
+									<input type='submit' class='btn btn-danger' name='confirm-delete' value='Sim!'>
+									<a type='button' class='btn btn-default' href='quadro.php'>Oops, não!</a>
+								</form>
+							</div>";
+			}
+		?>
+		
 		<div class="container">
 			<div class="card card-container">
 				<img class="profile-img-card" src="img/logo_escola.png" />
@@ -135,9 +74,6 @@
 					<button class="btn btn-info btn-block" type="submit" name="update">Atualizar</button>
 					<button class="btn btn-danger btn-block" type="submit" name="delete">Deletar</button>
 				</form><!-- /form -->
-				<a href="#" class="forgot-password">
-					Esqueceu sua senha?
-				</a>
 			</div><!-- /card-container -->
 		</div><!-- /container -->
 	</section>

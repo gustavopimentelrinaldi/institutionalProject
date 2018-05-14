@@ -36,9 +36,14 @@
     padding-top: 7em;
 }
 
- body, html{
+ #index{
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+}
+
+#backoffice{
+    background-repeat: no-repeat;
+    background: rgb(58, 141, 81);
 }
 
 .card-container.card{

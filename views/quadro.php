@@ -1,6 +1,9 @@
 <?php
 	session_start();
 	if($_SESSION['tipo_de_acesso'] == null){ header('Location: index.php?erro=1'); }
+	$update = isset($_GET['update']) ? $_GET['update'] : 0;
+	$delete = isset($_GET['delete']) ? $_GET['delete'] : 0;
+	$create = isset($_GET['create']) ? $_GET['create'] : 0;
 	require_once '../controllers/bdConnection.php';
 	$query = "SELECT * FROM curso";
 	$result = mysqli_query($conn, $query);
@@ -10,26 +13,27 @@
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="index">
 	<nav class="navbar navbar-findcond">
 		<div class="container">
 			<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar">Menu</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar">Menu</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="#">Grade Horária</a>
 			</div>
+
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-				<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<li><a href='cadastro.php'>Cadastrar Curso</a></li>"; }?>
+					<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<li><a href='cadastro.php'>Cadastrar Curso</a></li>"; }?>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<i class="fa fa-fw fa-bell-o"></i> Acesso 
@@ -39,29 +43,55 @@
 						</a>
 					</li>
 					<li class="active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
-					<li><a href='../controllers/logout.php'>Sair</a></li>
+					<li><a href='../controllers/logout.php'>sair</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
 	<section class="content">
+		<?php
+			if($update == 1){
+				echo '<div class="alert alert-success alert-dismissible container" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Atualizado!</strong>
+							</div>';
+			}
+		?>
+
+		<?php
+			if($delete == 1){
+				echo '<div class="alert alert-danger alert-dismissible container" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Excluido!</strong>
+							</div>';
+			}
+		?>
+
+		<?php
+			if($create == 1){
+				echo '<div class="alert alert-info alert-dismissible container" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Adicionado!</strong>
+							</div>';
+			}
+		?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-						<nav class="dropdown">
-							<h1 class="panel-title dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Quadro de Horários <small><i class="glyphicon glyphicon-triangle-bottom"></i></small></h1>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li class="segunda"><a href="#">Segunda</a></li>
-								<li class="terca"><a href="#">Terça</a></li>
-								<li class="quarta"><a href="#">Quarta</a></li>
-								<li class="quinta"><a href="#">Quinta</a></li>
-								<li class="sexta"><a href="#">Sexta</a></li>
-								<li class="sabado"><a href="#">Sábado</a></li>
-							</ul>
-						</nav>
+							<nav class="dropdown">
+								<h1 class="panel-title dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Quadro de Horários <small><i class="glyphicon glyphicon-triangle-bottom"></i></small></h1>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<li class="segunda"><a href="#">Segunda</a></li>
+									<li class="terca"><a href="#">Terça</a></li>
+									<li class="quarta"><a href="#">Quarta</a></li>
+									<li class="quinta"><a href="#">Quinta</a></li>
+									<li class="sexta"><a href="#">Sexta</a></li>
+									<li class="sabado"><a href="#">Sábado</a></li>
+								</ul>
+							</nav>
 						
 						<div class="pull-right">
 							<span class="clickable filter" data-toggle="tooltip" title="Filtrar" data-container="body">
@@ -120,27 +150,26 @@
 								</tr>
 							</thead>
 							<tbody>
-							<tr>
-							<td>teste</td>
-							<td>sdsadsa</td>
-							</tr>
-
-							<tr>
-							<td>eta</td>
-							<td>maluco</td>
-							</tr>
-							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+								<tr>
+									<td>teste</td>
+									<td>sdsadsa</td>
+								</tr>
+								<tr>
+									<td>eta</td>
+									<td>maluco</td>
+								</tr>
+								<?php
+									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+										}
+									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
+										}
+									}else {
+											echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
 									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
 								?>
 							</tbody>
 						</table>
@@ -159,18 +188,18 @@
 								</tr>
 							</thead>
 							<tbody>
-							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+								<?php
+									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+										}
+									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
+										}
+									}else {
+											echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
 									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
 								?>
 							</tbody>
 						</table>
@@ -189,18 +218,18 @@
 								</tr>
 							</thead>
 							<tbody>
-							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
+								<?php
+									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
+										}
+									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
+										while( $row = mysqli_fetch_assoc($result) ) {
+											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
+										}
+									}else {
 										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
+									}
 								?>
 							</tbody>
 						</table>
@@ -259,7 +288,7 @@
 										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
 									}
 								}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
+									echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
 								}
 								?>
 							</tbody>

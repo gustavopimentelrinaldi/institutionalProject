@@ -29,3 +29,25 @@
 	$_SESSION['tipo_de_acesso'] = $user['acesso'];
 	header('Location: ../views/quadro.php');
 ?>
+
+<script>
+	$(document).ready( function(){
+		//verificar se os campos de usuário e senha foram devidamente preenchidos
+		$('#log').click(function(){
+			var campo_vazio = false;
+			if($('#email').val() == ''){
+				$('#email').css({'border-color': '#A94442'});
+				campo_vazio = true;
+			} else {
+				$('#email').css({'border-color': '#CCC'});
+			}
+			if($('#senha').val() == ''){
+				$('#senha').css({'border-color': '#A94442'});
+				campo_vazio = true;
+			} else {
+				$('#senha').css({'border-color': '#CCC'});
+			}
+			if(campo_vazio) return false;
+		});
+	});					
+</script>
