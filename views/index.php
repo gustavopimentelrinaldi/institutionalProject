@@ -9,15 +9,14 @@
 	<title>Login ~ Quadro</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/jquery-1.11.1.min.js"></script>
 </head>
 <body id="index">
-	<nav class="navbar navbar-findcond navbar-fixed-top">
+	<nav class="navbar navbar-findcond">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
+					<span class="icon-bar glyphicon glyphicon-option-vertical"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
@@ -55,6 +54,10 @@
 		</div><!-- /container -->
 	</section>
 
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-3.1.0.min.js"></script>
 	<script>
 		$('.close').click(function(){
 			$('.alert').fadeOut();

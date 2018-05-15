@@ -4,10 +4,6 @@
 	$update = isset($_GET['update']) ? $_GET['update'] : 0;
 	$delete = isset($_GET['delete']) ? $_GET['delete'] : 0;
 	$create = isset($_GET['create']) ? $_GET['create'] : 0;
-	require_once '../controllers/bdConnection.php';
-	$query = "SELECT * FROM curso";
-	$result = mysqli_query($conn, $query);
-	mysqli_close($conn);
 ?>
 <html lang="PT-BR">
 <head>
@@ -22,9 +18,9 @@
 	<nav class="navbar navbar-findcond">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar">Menu</span>
+					<span class="icon-bar glyphicon glyphicon-option-vertical"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
@@ -36,14 +32,14 @@
 					<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<li><a href='cadastro.php'>Cadastrar Curso</a></li>"; }?>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<i class="fa fa-fw fa-bell-o"></i> Acesso 
+							<i class="fa fa-fw fa-bell-o"></i> acesso 
 							<span class="badge">
 								<?php echo $_SESSION['tipo_de_acesso']; ?>
 							</span>
 						</a>
 					</li>
 					<li class="active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
-					<li><a href='../controllers/logout.php'>sair</a></li>
+					<li><a href='../controllers/logout_controller.php'>sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -51,30 +47,7 @@
 
 	<section class="content">
 		<?php
-			if($update == 1){
-				echo '<div class="alert alert-success alert-dismissible container" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<strong>Atualizado!</strong>
-							</div>';
-			}
-		?>
-
-		<?php
-			if($delete == 1){
-				echo '<div class="alert alert-danger alert-dismissible container" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<strong>Excluido!</strong>
-							</div>';
-			}
-		?>
-
-		<?php
-			if($create == 1){
-				echo '<div class="alert alert-info alert-dismissible container" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<strong>Adicionado!</strong>
-							</div>';
-			}
+			include('../controllers/alert_controller.php');
 		?>
 		<div class="container">
 			<div class="row">
@@ -104,193 +77,123 @@
 					</div>
 					<div class="table-responsive" id="dev-table">
 						<table class="table table-hover table-bordered table-striped tabela1">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+							<thead class='align'>
+								<tr class='align'>
+									<th class='align'>Segunda</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
 							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr>";
-											echo "<td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td>";
-											echo '<td><a href="editaCurso.php?id=' . $row['id'] . '" class="btn btn-primary btn-md">Editar</a></td>';
-										echo "</tr>";
-									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
-								?>
+								include('../controllers/table/segunda_controller.php');
+							?>
 							</tbody>
 						</table>
 
 						<table class="table table-hover table-bordered table-striped tabela2">
 							<thead>
-								<tr>
-									<th>Terça-Feira</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+								<tr class='align'>
+									<th class='align'>Terça</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>teste</td>
-									<td>sdsadsa</td>
-								</tr>
-								<tr>
-									<td>eta</td>
-									<td>maluco</td>
-								</tr>
-								<?php
-									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-										}
-									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-										}
-									}else {
-											echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-									}
-								?>
+							<?php
+								include('../controllers/table/terca_controller.php');
+							?>
 							</tbody>
 						</table>
 
 						<table class="table table-hover table-bordered table-striped tabela3">
 							<thead>
-								<tr>
-									<th>Quarta-Feira</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+								<tr class='align'>
+									<th class='align'>Quarta</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
-								<?php
-									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-										}
-									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-										}
-									}else {
-											echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-									}
-								?>
+							<?php
+								include('../controllers/table/quarta_controller.php');
+							?>
 							</tbody>
 						</table>
 
 						<table class="table table-hover table-bordered table-striped tabela4">
 							<thead>
-								<tr>
-									<th>Quinta-Feira</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+								<tr class='align'>
+									<th class='align'>Quinta</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
-								<?php
-									if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-										}
-									} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-										while( $row = mysqli_fetch_assoc($result) ) {
-											echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-										}
-									}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-									}
-								?>
+							<?php
+								include('../controllers/table/quinta_controller.php');
+							?>
 							</tbody>
 						</table>
 
 						<table class="table table-hover table-bordered table-striped tabela5">
 							<thead>
-								<tr>
-									<th>Sexta-Feira</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+								<tr class='align'>
+									<th class='align'>Sexta</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
 							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
-										echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
-								?>
+								include('../controllers/table/sexta_controller.php');
+							?>
 							</tbody>
 						</table>
 
 						<table class="table table-hover table-bordered table-striped tabela6">
 							<thead>
-								<tr>
-									<th>Sábado</th>
-									<th>Curso</th>
-									<th>Turno</th>
-									<th>Disciplina</th>
-									<th>Professor</th>
-									<th>Sala</th>
-									<th>espaco</th>
+								<tr class='align'>
+									<th class='align'>Sábado</th>
+									<th class='align'>Curso</th>
+									<th class='align'>Turno</th>
+									<th class='align'>Disciplina</th>
+									<th class='align'>Professor</th>
+									<th class='align'>Sala</th>
+									<th class='align'>espaco</th>
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo "<th></th>"; } ?>
 								</tr>
 							</thead>
 							<tbody>
 							<?php
-								if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 1) {
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td><td><a href='editaCurso.php' class='btn btn-primary btn-md'>Editar</a></td></tr>";
-									}
-								} else if(mysqli_num_rows($result) > 0 && $_SESSION['tipo_de_acesso'] == 0){
-									while( $row = mysqli_fetch_assoc($result) ) {
-										echo "<tr><td>" . $row['id'] . "</td><td>" . $row['nome'] . "</td><td>" . $row['turno'] . "</td><td>" . $row['disciplina'] . "</td><td>" . $row['professor'] . "</td><td>" . $row['sala'] . "</td><td>" . $row['espaco'] . "</td></tr>";
-									}
-								}else {
-									echo "<div class='alert alert-warning container'>Nenhum cadastro para mostrar!</div>";
-								}
-								?>
+								include('../controllers/table/sabado_controller.php');
+								mysqli_close($conn);
+							?>
 							</tbody>
 						</table>
 					</div>
@@ -304,71 +207,7 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-3.1.0.min.js"></script>
-	<script src="js/index.js">
-	</script>
-	<script>
-		$('.dropdown-toggle').dropdown()
-
-		$(".tabela2").hide();	
-		$(".tabela3").hide();	
-		$(".tabela4").hide();	
-		$(".tabela5").hide();	
-		$(".tabela6").hide();	
-
-		$('.segunda').click(function(){
-			$(".tabela2").fadeOut(1000);
-			$(".tabela3").fadeOut(1000);
-			$(".tabela4").fadeOut(1000);
-			$(".tabela5").fadeOut(1000);
-			$(".tabela6").fadeOut(1000);
-			$(".tabela1").delay(1000).fadeIn(1000);
-		});
-		
-		$('.terca').click(function(){
-			$(".tabela1").fadeOut(1000)
-			$(".tabela3").fadeOut(1000);
-			$(".tabela4").fadeOut(1000);
-			$(".tabela5").fadeOut(1000);
-			$(".tabela6").fadeOut(1000);
-			$(".tabela2").delay(1000).fadeIn(1000);
-		});
-
-		$('.quarta').click(function(){
-			$(".tabela1").fadeOut(1000);
-			$(".tabela2").fadeOut(1000);
-			$(".tabela4").fadeOut(1000);
-			$(".tabela5").fadeOut(1000);
-			$(".tabela6").fadeOut(1000);
-			$(".tabela3").delay(1000).fadeIn(1000);
-		});	
-
-		$('.quinta').click(function(){
-			$(".tabela1").fadeOut(1000);
-			$(".tabela2").fadeOut(1000);
-			$(".tabela3").fadeOut(1000);
-			$(".tabela5").fadeOut(1000);
-			$(".tabela6").fadeOut(1000);
-			$(".tabela4").delay(1000).fadeIn(1000);
-		});
-
-		$('.sexta').click(function(){
-			$(".tabela1").fadeOut(1000);
-			$(".tabela2").fadeOut(1000);
-			$(".tabela3").fadeOut(1000);
-			$(".tabela4").fadeOut(1000);
-			$(".tabela6").fadeOut(1000);
-			$(".tabela5").delay(1000).fadeIn(1000);
-		});			
-
-		$('.sabado').click(function(){
-			$(".tabela1").fadeOut(1000);
-			$(".tabela2").fadeOut(1000);
-			$(".tabela3").fadeOut(1000);
-			$(".tabela4").fadeOut(1000);
-			$(".tabela5").fadeOut(1000);
-			$(".tabela6").delay(1000).fadeIn(1000);
-		});			
-		
-	</script>
+	<script src="js/index.js"></script>
+	<script src="js/table.js"></script>
 </body>
 </html>

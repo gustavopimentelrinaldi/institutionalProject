@@ -17,12 +17,12 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body id="index">
-	<nav class="navbar navbar-findcond navbar-fixed-top">
+	<nav class="navbar navbar-findcond">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
 					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
+					<span class="icon-bar glyphicon glyphicon-option-vertical"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
@@ -30,10 +30,10 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="quadro.php">Voltar</a></li>
+					<li class="active"><a href="quadro.php">voltar</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<i class="fa fa-fw fa-bell-o"></i> Acesso 
+								<i class="fa fa-fw fa-bell-o"></i> acesso 
 								<span class="badge">
 									<?php if($_SESSION['tipo_de_acesso'] == 1){ echo $_SESSION['tipo_de_acesso']; }?>
 								</span>
@@ -77,5 +77,15 @@
 			</div><!-- /card-container -->
 		</div><!-- /container -->
 	</section>
+
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-3.1.0.min.js"></script>
+	<script>
+		$('.close').click(function(){
+			$('.alert').fadeOut();
+		});
+	</script>
 </body>
 </html>

@@ -10,7 +10,7 @@
     $professor    = htmlspecialchars( $_POST["professor"] );
     
     if($nome) {
-      $query = "INSERT INTO curso (id, nome, turno, espaco, disciplina, sala, professor) VALUES (default, '$nome', '$turno', '$espaco', '$disciplina', '$sala', '$professor')";
+      $query = "INSERT INTO segunda (id, nome, turno, espaco, disciplina, sala, professor) VALUES (default, '$nome', '$turno', '$espaco', '$disciplina', '$sala', '$professor')";
       $result = mysqli_query( $conn, $query );
 
       if($result) {

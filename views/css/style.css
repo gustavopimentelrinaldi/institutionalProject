@@ -1,9 +1,21 @@
-/*
- * Specific styles of signin component
- */
-/*
- * General styles
- */
+.btn-warning{
+    background: orange;
+    color: #FFFFFF;
+    border: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 25px;
+    transition: 0.2s linear all;
+}
+
+.align{
+   text-align: center;
+}
+
+.btn-warning:hover{
+    background-color: rgb(104, 145, 162);
+    color: #FFFFFF;
+}
 
  nav.navbar-findcond{ 
      background: #fff; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; 
@@ -33,7 +45,7 @@
 }
  
 .main, .register{
-    padding-top: 7em;
+    padding: 2em;
 }
 
  #index{
