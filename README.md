@@ -1,4 +1,4 @@
-# Project[Institutional]
+# Resources
 
 * PHP
 * MySQL
@@ -42,8 +42,16 @@ index.php
 # How to run
 ```
 git clone
+```
+```
 Run Apache and MySQL from XAMPP
+```
+```
 Drag and drop in htdocs(XAMPP)
+```
+```
 Change models/init.php file with your DB Info's
+```
+```
 Access localhost/
 ```
