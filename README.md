@@ -1,8 +1,8 @@
 # Resources
 
-* ```PHP```
-* ```MySQL```
-* ```Bootstrap```
+```PHP```
+```MySQL```
+```Bootstrap```
 
 # Organized in the MVC design pattern
 ```
