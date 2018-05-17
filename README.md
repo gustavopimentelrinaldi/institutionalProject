@@ -1,4 +1,4 @@
-# Project[Institutional]
+# Resources
 
 * ```PHP```
 * ```MySQL```
