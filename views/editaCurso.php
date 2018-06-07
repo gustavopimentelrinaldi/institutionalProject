@@ -13,6 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Registrar ~ Quadro</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -43,6 +44,21 @@
 				</ul>
 			</div>
 		</div>
+	</nav>
+
+	<nav class="navigation">
+		<div class="container">
+			<header class="py-2">
+	      <div class="row flex-nowrap justify-content-between align-items-center">
+	        <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2 text-center">
+	          <img class="img-fluid" src="img/logo_escola.png" alt=""/>
+	        </div>
+	        <div class="col-4 d-flex justify-content-end align-items-center">
+	          <a class="btn btn-sm btn-outline-info" href="index.php">Usuário</a>
+	        </div>
+	      </div>
+	    </header>
+	  </div>
 	</nav>
 
 	<section class="register">
@@ -78,10 +94,15 @@
 		</div><!-- /container -->
 	</section>
 
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-	<script src="js/bootstrap-3.1.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="js/popper.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/table.js"></script>
 	<script>
 		$('.close').click(function(){
 			$('.alert').fadeOut();
