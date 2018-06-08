@@ -54,5 +54,4 @@ if($this.css('display') != 'none') {
 $panel.find('.panel-body input').focus();
 }
 });
-$('[data-toggle="tooltip"]').tooltip();
 })

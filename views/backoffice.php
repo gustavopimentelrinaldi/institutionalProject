@@ -38,14 +38,17 @@
 					<img class="img-fluid mx-auto mt-3" src="img/logo_escola.png"/>
 				  <form method="post" action="../controllers/backoffice_controller.php">
 			      <div class="form-label-group mt-4 mx-auto col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-			        <input type="email" id="email" class="form-control" name="email" placeholder="Email"/>
+			      	<label for="email">Email:</label>
+			        <input type="email" id="email" class="form-control" name="email" placeholder="email@email.com"/>
 			      </div>
 
 			      <div class="form-label-group mx-auto col-12 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-			        <input type="password" id="senha" class="form-control" name="senha" placeholder="Senha"/>
+			      	<label for="email">Senha:</label>
+			        <input type="password" id="senha" class="form-control" name="senha" placeholder="********"/>
 			      </div>
 
 			      <div class="form-label-group mx-auto col-12 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+			      	<hr>
 			       	<button id="log" class="btn btn-primary btn-block" name="entrar" type="submit">Entrar</button>
 			       	<?php
 								if($erro == 1){

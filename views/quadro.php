@@ -39,23 +39,23 @@
   </nav>
 
 	<section class="content">
-		<?php
-			include('../controllers/alert_controller.php');
-		?>
 		<div class="mx-auto mb-5 mt-5 col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+			<?php
+				include('../controllers/alert_controller.php');
+			?>
 			<div class="card">
 			  <div class="card-header">
-			    <div class="btn-group">
-					  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <div class="dropdown">
+					  <button class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    Dia da semana
 					  </button>
-					  <div class="dropdown-menu">
-					  	<li class="segunda"><a class="dropdown-item" href="#">Segunda</a></li>
-					    <li class="terca"><a class="dropdown-item" href="#">Terça</a></li>
-					    <li class="quarta"><a class="dropdown-item" href="#">Quarta</a></li>
-					    <li class="quinta"><a class="dropdown-item" href="#">Quinta</a></li>
-					    <li class="sexta"><a class="dropdown-item" href="#">Sexta</a></li>
-					    <li class="sabado"><a class="dropdown-item" href="#">Sábado</a></li>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					  	<a class="segunda dropdown-item" href="#">Segunda</a>
+					   	<a class="terca dropdown-item" href="#">Terça</a>
+					   	<a class="quarta dropdown-item" href="#">Quarta</a>
+					    <a class="quinta dropdown-item" href="#">Quinta</a>
+					    <a class="sexta dropdown-item" href="#">Sexta</a>
+					    <a class="sabado dropdown-item" href="#">Sábado</a>
 					  </div>
 					</div>
 			  </div>
@@ -194,7 +194,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="js/popper.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="js/jquery.js"></script>

@@ -7,6 +7,26 @@ body.adms{
   background: linear-gradient(#6c2726, #6c2726);
 }
 
+label{
+  font-weight: 500;
+}
+
+.del h3{
+  font-size: 23px;
+}
+
+.cad, .edita{
+  margin-top: 10px;
+}
+
+input{
+  height: 45px;
+}
+
+section{
+  margin: 0 0 50px 0;
+}
+
 /* navigation */
 .navigation{
   background: #FFFFFF;
@@ -14,7 +34,14 @@ body.adms{
 
 /* user */
 .user{
-  
+
+}
+
+#log{
+  background: #4192BF;
+  border: none;
+  border-radius: 0;
+  height: 40px;
 }
 
 .user .alert, .adm .alert{
@@ -55,25 +82,40 @@ header {
 /* responsive */
 /* extra small */
 @media all and (max-width: 576px) {
- 
+  .navigation img{
+    width: 120px;
+    margin: -5px 0 0 -10px;
+  }
 }
 
 /* small */
 @media all and (min-width: 576px) {
-
+  .navigation img{
+    width: 120px;
+    margin: -5px 0 0 -50px;
+  }
 }
 
 /* medium */
 @media all and (min-width: 768px) {
-
+  .navigation img{
+    width: 120px;
+    margin: -5px 0 0 -70px;
+  }
 }
 
 /* large */
 @media all and (min-width: 992px) {
-
+  .navigation img{
+    width: 120px;
+    margin: -5px 0 0 -10px;
+  }
 }
 
 /* extra large */
 @media all and (min-width: 1200px) {
-
+.navigation img{
+    width: 150px;
+    margin: -10px 0 0 -10px;
+  }
 }
